@@ -1,8 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"moduleA/tasks"
+)
 
 func main() {
-	fmt.Println("hello")
-	fmt.Scanln()
+	fmt.Println("start")
+
+	tasks.MainA()
+	//tasks.MainB()
+
+	//fmt.Scan()
 }
