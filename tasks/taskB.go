@@ -2,6 +2,8 @@ package tasks
 
 import (
 	"fmt"
+	"math/rand"
+	"sort"
 )
 
 func MainB() {
@@ -9,7 +11,123 @@ func MainB() {
 	//slovarTest()
 	//sortTest()
 	//convertTest()
-	// printEveryType("don 16")
+	//printEveryType("don 16")
+
+	// var mass = []int{0, 1, 2, 3, 4, 5}
+	// testMass(mass)
+	// var mass2 = testMass2(mass)
+
+	// for i := range mass2 {
+	// 	fmt.Println(mass2[i])
+	// }
+
+}
+
+func oopTest() {
+	// man := Persons{"Jack", 15, 100}
+	// man.AddMoney()
+	// AddMoney2(&man)
+	// fmt.Print(man.money)
+}
+
+func binaryTreeTest() {
+	var mainTree binaryTree
+	mainTree.AddNode(10)
+	mainTree.AddNode(15)
+	mainTree.AddNode(5)
+	fmt.Println(mainTree.root.value)
+}
+
+func gourutinesTest() {
+
+	// start := time.Now()
+
+	// chann1 := make(chan int)
+	// chann2 := make(chan int)
+
+	// go timerCheck(chann1)
+	// go timerCheck(chann2)
+
+	// <-chann1
+	// <-chann2
+
+	// duration := time.Since(start)
+	// fmt.Println(duration)
+
+	// https://blog.ildarkarymov.ru/posts/go-concurrency/
+}
+
+type binaryTree struct {
+	root *nodeTree
+}
+
+type nodeTree struct {
+	value     int
+	leftNode  *nodeTree
+	rightNode *nodeTree
+}
+
+func (thisTree *binaryTree) AddNode(val int) {
+
+	if thisTree.root == nil {
+		thisTree.root = &nodeTree{val, nil, nil}
+		return
+	}
+
+	if thisTree.root != nil {
+
+		temp := thisTree.root
+		for true {
+			if val > temp.value {
+				if temp.rightNode == nil {
+					temp.rightNode = &nodeTree{val, nil, nil}
+					return
+				}
+				temp = temp.rightNode
+			} else {
+				if temp.leftNode == nil {
+					temp.leftNode = &nodeTree{val, nil, nil}
+					return
+				}
+				temp = temp.leftNode
+			}
+		}
+
+	}
+
+}
+
+func testMass2(temp []int) []int {
+
+	var masser = temp
+
+	for i := range masser {
+		masser[i] += 10
+	}
+
+	return masser
+}
+
+func testMass(temp []int) {
+
+	for i := range temp {
+		temp[i] += 10
+	}
+
+}
+
+type Persons struct {
+	name  string
+	age   int
+	money int
+}
+
+func (x *Persons) AddMoney() {
+	x.money += 100
+}
+
+func AddMoney2(x *Persons) {
+	x.money += 200
 }
 
 func slovarTest() {
@@ -53,4 +171,26 @@ func convertTest() {
 
 func printEveryType[T any](s T) {
 	fmt.Println(s)
+}
+
+func timerCheck(zaglushka_kanala chan int) {
+
+	var mass []int
+	for i := 0; i < 10000; i++ {
+		mass = append(mass, i)
+	}
+
+	rand.Shuffle(len(mass), func(i, j int) {
+		mass[i], mass[j] = mass[j], mass[i]
+	})
+
+	sort.Ints(mass)
+
+	// засечь сколько времиени с горутинами
+
+	// for i := range mass {
+	// 	fmt.Print(mass[i], "  ")
+	// }
+
+	zaglushka_kanala <- 1 // говорим что корутина закончена
 }

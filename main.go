@@ -7,9 +7,7 @@ import (
 
 func main() {
 	fmt.Println("start")
-
 	//tasks.MainA()
 	tasks.MainB()
-
 	//fmt.Scan()
 }
