@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sort"
+	"time"
 )
 
 func MainB() {
@@ -12,6 +13,10 @@ func MainB() {
 	//sortTest()
 	//convertTest()
 	//printEveryType("don 16")
+
+	// oopTest()
+	// binaryTreeTest()
+	// gourutinesTest()
 
 	// var mass = []int{0, 1, 2, 3, 4, 5}
 	// testMass(mass)
@@ -24,10 +29,10 @@ func MainB() {
 }
 
 func oopTest() {
-	// man := Persons{"Jack", 15, 100}
-	// man.AddMoney()
-	// AddMoney2(&man)
-	// fmt.Print(man.money)
+	man := Persons{"Jack", 15, 100}
+	man.AddMoney()
+	AddMoney2(&man)
+	fmt.Print(man.money)
 }
 
 func binaryTreeTest() {
@@ -40,19 +45,19 @@ func binaryTreeTest() {
 
 func gourutinesTest() {
 
-	// start := time.Now()
+	start := time.Now()
 
-	// chann1 := make(chan int)
-	// chann2 := make(chan int)
+	chann1 := make(chan int)
+	chann2 := make(chan int)
 
-	// go timerCheck(chann1)
-	// go timerCheck(chann2)
+	go timerCheck(chann1)
+	go timerCheck(chann2)
 
-	// <-chann1
-	// <-chann2
+	<-chann1
+	<-chann2
 
-	// duration := time.Since(start)
-	// fmt.Println(duration)
+	duration := time.Since(start)
+	fmt.Println(duration)
 
 	// https://blog.ildarkarymov.ru/posts/go-concurrency/
 }
