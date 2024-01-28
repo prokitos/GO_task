@@ -26,13 +26,23 @@ func MainB() {
 	// 	fmt.Println(mass2[i])
 	// }
 
+	oopTest()
+
 }
 
 func oopTest() {
 	man := Persons{"Jack", 15, 100}
-	man.AddMoney()
-	AddMoney2(&man)
-	fmt.Print(man.money)
+	man.AddMoney()  // + 100
+	AddMoney2(&man) // + 200
+	//fmt.Print(man.money) // = 400
+
+	// тест наследования и интерфейса
+	var cman CoolPersons
+	cman.Persons = man       // 400
+	cman.AddMoney()          // + 200 так как он крутой
+	AddMoney2(&cman.Persons) // + 200
+	fmt.Print(cman.money)    // = 800
+
 }
 
 func binaryTreeTest() {
@@ -121,6 +131,14 @@ func testMass(temp []int) {
 
 }
 
+type IPerson interface {
+	AddMoney()
+}
+
+type CoolPersons struct {
+	Persons
+}
+
 type Persons struct {
 	name  string
 	age   int
@@ -132,6 +150,10 @@ func (x *Persons) AddMoney() {
 }
 
 func AddMoney2(x *Persons) {
+	x.money += 200
+}
+
+func (x *CoolPersons) AddMoney() {
 	x.money += 200
 }
 
