@@ -40,8 +40,9 @@ func oopTest() {
 	var cman CoolPersons
 	cman.Persons = man       // 400
 	cman.AddMoney()          // + 200 так как он крутой
+	cman.Persons.AddMoney()  // + 100 так как метод обычного чела
 	AddMoney2(&cman.Persons) // + 200
-	fmt.Print(cman.money)    // = 800
+	fmt.Print(cman.money)    // = 900
 
 }
 
@@ -137,8 +138,8 @@ type IPerson interface {
 
 type CoolPersons struct {
 	Persons
+	coolStatus bool
 }
-
 type Persons struct {
 	name  string
 	age   int
