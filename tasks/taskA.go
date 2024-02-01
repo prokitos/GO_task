@@ -3,6 +3,8 @@ package tasks
 import (
 	"fmt"
 	"strconv"
+	"strings"
+	"unicode"
 )
 
 func MainA() {
@@ -32,10 +34,66 @@ func MainA() {
 	// fmt.Print(RepeatStr(10, "ha"))
 
 	// подсчитать сумму негативных и количество позитивных чисел
-	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15}
-	res := CountPositivesSumNegatives(arr)
-	fmt.Print(res[0], "  ", res[1])
+	// arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15}
+	// res := CountPositivesSumNegatives(arr)
+	// fmt.Print(res[0], "  ", res[1])
 
+	// инвертировать регист строки
+	// fmt.Println(ToAlternatingCase("hello WORLDS"))
+
+	// убрать все пробелы из строки
+	// fmt.Println(NoSpace("test testov   teest "))
+
+	// найти ближайшее квадратное число
+	fmt.Println(NearestSq(111))
+}
+
+func NearestSq(n int) int {
+	var i int = 1
+	var first int = 1
+	var second int = 1
+	for {
+		first = second
+		second = i * i
+
+		if second == n {
+			return second
+		}
+
+		if second > n && first < n {
+			if second-n > n-first {
+				return first
+			} else {
+				return second
+			}
+		}
+
+		i++
+	}
+
+	// быстрое решение
+	// число в корень
+	// потом число округлить
+	// и привести к инту
+}
+
+func NoSpace(word string) string {
+	return strings.ReplaceAll(word, " ", "")
+}
+
+func ToAlternatingCase(str string) string {
+	var result string
+	for _, i := range str {
+		if i == unicode.ToLower(i) {
+			result += string(unicode.ToUpper(i))
+		} else if i == unicode.ToUpper(i) {
+			result += string(unicode.ToLower(i))
+		} else {
+			result += string(i)
+		}
+	}
+
+	return result
 }
 
 func CountPositivesSumNegatives(numbers []int) []int {
