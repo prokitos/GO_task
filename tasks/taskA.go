@@ -45,7 +45,48 @@ func MainA() {
 	// fmt.Println(NoSpace("test testov   teest "))
 
 	// найти ближайшее квадратное число
-	fmt.Println(NearestSq(111))
+	// fmt.Println(NearestSq(111))
+
+	// убрать последний символ строки
+	//fmt.Println(delLatest("kekas"))
+
+	// сумма квадратов всех чисел
+	// var mass = []int{1, 2, 3}
+	// fmt.Print(SquareSum(mass))
+
+	// вернуть тру если числа в массиве в порядке возрастания
+	var numbers = []int{1, 2, 4, 3, 4, 5}
+	fmt.Print(InAscOrder(numbers))
+}
+
+func InAscOrder(numbers []int) bool {
+
+	var result bool = true
+	var old int = numbers[0]
+	for i := 1; i < len(numbers); i++ {
+		if old > numbers[i] {
+			result = false
+			break
+		}
+		old = numbers[i]
+	}
+
+	return result
+}
+
+func SquareSum(numbers []int) int {
+	var result int = 0
+	for _, i := range numbers {
+		result += i * i
+	}
+
+	return result
+}
+
+func delLatest(str string) string {
+	var lastChar string = string(str[len(str)-1])
+	var result string = strings.TrimSuffix(str, lastChar)
+	return result
 }
 
 func NearestSq(n int) int {
