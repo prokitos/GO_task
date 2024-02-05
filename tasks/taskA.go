@@ -2,6 +2,7 @@ package tasks
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
@@ -55,8 +56,20 @@ func MainA() {
 	// fmt.Print(SquareSum(mass))
 
 	// вернуть тру если числа в массиве в порядке возрастания
-	var numbers = []int{1, 2, 4, 3, 4, 5}
-	fmt.Print(InAscOrder(numbers))
+	// var numbers = []int{1, 2, 4, 3, 4, 5}
+	// fmt.Print(InAscOrder(numbers))
+
+	// сортировать массив строк по длинне
+	var mass = []string{"aaaaa", "bb", "zzzz", "ccccccc", "rrr"}
+	mass = SortByLength(mass)
+	for _, element := range mass {
+		fmt.Println(element)
+	}
+}
+
+func SortByLength(arr []string) []string {
+	sort.Slice(arr, func(i, j int) bool { return len(arr[i]) < len(arr[j]) })
+	return arr
 }
 
 func InAscOrder(numbers []int) bool {
