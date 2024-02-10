@@ -60,11 +60,57 @@ func MainA() {
 	// fmt.Print(InAscOrder(numbers))
 
 	// сортировать массив строк по длинне
-	var mass = []string{"aaaaa", "bb", "zzzz", "ccccccc", "rrr"}
-	mass = SortByLength(mass)
-	for _, element := range mass {
-		fmt.Println(element)
+	// var mass = []string{"aaaaa", "bb", "zzzz", "ccccccc", "rrr"}
+	// mass = SortByLength(mass)
+	// for _, element := range mass {
+	// 	fmt.Println(element)
+	// }
+
+	// найти количество делителей числа
+	//fmt.Print(Divisors(100))
+
+	// кастомная сортировка строки. каждое слово имеет цифру внутри, и цифра означает позицию в строке
+	fmt.Print(Order("is2 Thi1s T4est 3a"))
+}
+
+func Order(s string) string {
+	if len(s) == 0 {
+		return ""
 	}
+
+	// переводим строку в массив слов
+	wordsMass := strings.Split(s, " ")
+	res := make([]string, len(wordsMass))
+
+	// перебираем каждое слово
+	for _, slovo := range wordsMass {
+		for _, symbol := range slovo {
+			// если слово имеет цифру, то переводим её в отдельное число
+			index, err := strconv.Atoi(string(symbol))
+			if err != nil {
+				continue
+			}
+
+			// добавляем в массив это слово, по индексу числа
+			res[index-1] = slovo
+		}
+	}
+
+	// собираем массив слов в строку
+	return strings.Join(res, " ")
+}
+
+func Divisors(n int) int {
+	var counter int = 1
+
+	for i := 1; i <= n/2; i++ {
+		if n%i == 0 {
+			counter++
+		}
+
+	}
+
+	return counter
 }
 
 func SortByLength(arr []string) []string {
