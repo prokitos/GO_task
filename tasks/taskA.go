@@ -2,6 +2,7 @@ package tasks
 
 import (
 	"fmt"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -70,7 +71,35 @@ func MainA() {
 	//fmt.Print(Divisors(100))
 
 	// кастомная сортировка строки. каждое слово имеет цифру внутри, и цифра означает позицию в строке
-	fmt.Print(Order("is2 Thi1s T4est 3a"))
+	//fmt.Print(Order("is2 Thi1s T4est 3a"))
+
+	// написать функцию которая букву перед решеткой.  abc#d = abd, так как # убрала букву c
+	fmt.Print(CleanString("abc#d##c"))
+}
+
+func CleanString(s string) string {
+
+	if len(s) == 0 {
+		return ""
+	}
+	var result string = ""
+
+	// перебор по входной строке
+	for _, elem := range s {
+
+		// если такой символ, то уменьшаем размер строки на (текущий размер минус 1), и только если строка не пустая
+		// иначе добавляем символ в результат
+		if elem == '#' {
+			if len(result) > 0 {
+				result = result[:len(result)-1]
+			}
+		} else {
+			result += string(elem)
+		}
+
+	}
+
+	return result
 }
 
 func Order(s string) string {
@@ -78,26 +107,40 @@ func Order(s string) string {
 		return ""
 	}
 
-	// переводим строку в массив слов
+	// // переводим строку в массив слов
+	// wordsMass := strings.Split(s, " ")
+	// res := make([]string, len(wordsMass))
+
+	// // перебираем каждое слово
+	// for _, slovo := range wordsMass {
+	// 	for _, symbol := range slovo {
+	// 		// если слово имеет цифру, то переводим её в отдельное число
+	// 		index, err := strconv.Atoi(string(symbol))
+	// 		if err != nil {
+	// 			continue
+	// 		}
+
+	// 		// добавляем в массив это слово, по индексу числа
+	// 		res[index-1] = slovo
+	// 	}
+	// }
+
+	// // собираем массив слов в строку
+	// return strings.Join(res, " ")
+
+	// переводим строку в массив слов, и указываем регекс
 	wordsMass := strings.Split(s, " ")
-	res := make([]string, len(wordsMass))
+	regx := regexp.MustCompile("[1-9]")
 
-	// перебираем каждое слово
-	for _, slovo := range wordsMass {
-		for _, symbol := range slovo {
-			// если слово имеет цифру, то переводим её в отдельное число
-			index, err := strconv.Atoi(string(symbol))
-			if err != nil {
-				continue
-			}
+	// делаем кастомную сортировку
+	sort.SliceStable(wordsMass, func(i, j int) bool {
+		// получаем регексом число из двух слов, и слово с большим числом кидаем в конец
+		num_i := regx.FindString(wordsMass[i])
+		num_j := regx.FindString(wordsMass[j])
+		return num_i < num_j
+	})
 
-			// добавляем в массив это слово, по индексу числа
-			res[index-1] = slovo
-		}
-	}
-
-	// собираем массив слов в строку
-	return strings.Join(res, " ")
+	return strings.Join(wordsMass, " ")
 }
 
 func Divisors(n int) int {
