@@ -74,7 +74,35 @@ func MainA() {
 	//fmt.Print(Order("is2 Thi1s T4est 3a"))
 
 	// написать функцию которая букву перед решеткой.  abc#d = abd, так как # убрала букву c
-	fmt.Print(CleanString("abc#d##c"))
+	//fmt.Print(CleanString("abc#d##c"))
+
+	// строку в camel case
+	fmt.Print(CamelCase("hello case"))
+}
+
+func CamelCase(s string) string {
+
+	if len(s) == 0 {
+		return ""
+	}
+
+	wordsMass := strings.Split(s, " ")
+	var result string
+
+	for _, elem := range wordsMass {
+
+		result += strings.Title(elem)
+		result += ""
+	}
+
+	return result
+
+	// заменяем старую строку и пробел, на новую строку в Title и без пробела, бесконечное количество раз
+	// var result string = strings.Replace(strings.Title(s)," ","",-1)
+	// var result string = strings.ReplaceAll(strings.Title(s), " ", "")
+
+	// fields автоматически делает массив строк по пробелу, и далем в титульном виде, и собираем строку без пробела
+	// var result string = Join(Fields(Title(str)), "")
 }
 
 func CleanString(s string) string {
