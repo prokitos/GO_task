@@ -77,7 +77,18 @@ func MainA() {
 	//fmt.Print(CleanString("abc#d##c"))
 
 	// строку в camel case
-	fmt.Print(CamelCase("hello case"))
+	//fmt.Print(CamelCase("hello case"))
+
+	// дано число. привести его к следу
+	fmt.Print(RoundToNext5(17))
+}
+
+func RoundToNext5(n int) int {
+	for n%5 != 0 {
+		n++
+	}
+	return n
+
 }
 
 func CamelCase(s string) string {
