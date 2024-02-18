@@ -80,7 +80,46 @@ func MainA() {
 	//fmt.Print(CamelCase("hello case"))
 
 	// дано число. привести его к следу
-	fmt.Print(RoundToNext5(17))
+	//fmt.Print(RoundToNext5(17))
+
+	// перевести буквы в численные коды, и потом в инт
+	// ABC = 65 + 66 + 67 = 656667 (INT)
+	//fmt.Print(Calc("abcdef"))
+
+	// вывести число, которое встречается чаще всего в массиве. если количество одинаковое, то выбрать макс число
+	var mass = []int{12, 10, 8, 12, 7, 6, 4, 10, 12}
+	fmt.Print(HighestRank(mass))
+}
+
+func HighestRank(nums []int) int {
+	myMap := make(map[int]int)
+
+	for _, i := range nums {
+		myMap[i]++
+	}
+
+	var max int = 0
+	var result int = 0
+	for i, j := range myMap {
+		if (j > max) || (j == max && i > result) {
+			max = j
+			result = i
+		}
+	}
+
+	return result
+}
+
+func Calc(s string) int {
+	var result int = 0
+	var preResult string
+
+	for _, i := range s {
+		preResult += strconv.Itoa(int(i))
+	}
+
+	result, _ = strconv.Atoi(preResult)
+	return result
 }
 
 func RoundToNext5(n int) int {
