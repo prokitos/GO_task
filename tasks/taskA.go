@@ -87,8 +87,28 @@ func MainA() {
 	//fmt.Print(Calc("abcdef"))
 
 	// вывести число, которое встречается чаще всего в массиве. если количество одинаковое, то выбрать макс число
-	var mass = []int{12, 10, 8, 12, 7, 6, 4, 10, 12}
-	fmt.Print(HighestRank(mass))
+	// var mass = []int{12, 10, 8, 12, 7, 6, 4, 10, 12}
+	// fmt.Print(HighestRank(mass))
+
+	// получить массив фибоначи чисел
+	var mass = fibonachiFound(7)
+	for _, element := range mass {
+		fmt.Println(element)
+	}
+}
+
+func fibonachiFound(num int) []int {
+	var result = []int{0, 1}
+
+	var first int = 0
+	var second int = 1
+	for i := 2; i < num; i++ {
+		second = second + first
+		first = second - first
+		result = append(result, second)
+	}
+
+	return result
 }
 
 func HighestRank(nums []int) int {
