@@ -91,10 +91,46 @@ func MainA() {
 	// fmt.Print(HighestRank(mass))
 
 	// получить массив фибоначи чисел
-	var mass = fibonachiFound(7)
-	for _, element := range mass {
-		fmt.Println(element)
+	// var mass = fibonachiFound(7)
+	// for _, element := range mass {
+	// 	fmt.Println(element)
+	// }
+
+	// Добавить пробел между каждым символом в строке
+	//fmt.Print(Spacify("hello world"))
+
+	// дан массив разных цветов. сколько есть пар одинаковых цветов в этом массиве?
+	fmt.Print(NumberOfPairs([]string{"red", "blue", "red", "red", "red", "red"}))
+}
+
+// создаем переменную вывода сразу в функции, и нагружаем её
+func NumberOfPairs(gloves []string) (result int) {
+
+	dictionary := make(map[string]int, len(gloves))
+
+	for _, i := range gloves {
+		dictionary[i]++
+
+		if dictionary[i] == 2 {
+			result++
+			dictionary[i] = 0
+		}
 	}
+
+	return
+}
+
+func Spacify(s string) string {
+
+	// var arr []string
+	// for i := 0; i < len(s); i++ {
+	// 	arr = append(arr, string(s[i]))
+	// }
+	// res := strings.Join(arr, " ")
+	//return res
+
+	// либо через slpit сразу получить массив символов, и потом добавить пробел к каждому элементу массива
+	return strings.Join(strings.Split(s, ""), " ")
 }
 
 func fibonachiFound(num int) []int {
