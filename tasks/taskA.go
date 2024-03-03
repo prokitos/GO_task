@@ -100,7 +100,41 @@ func MainA() {
 	//fmt.Print(Spacify("hello world"))
 
 	// дан массив разных цветов. сколько есть пар одинаковых цветов в этом массиве?
-	fmt.Print(NumberOfPairs([]string{"red", "blue", "red", "red", "red", "red"}))
+	//fmt.Print(NumberOfPairs([]string{"red", "blue", "red", "red", "red", "red"}))
+
+	// посчитть количество гласных
+	//fmt.Print(GetCount("hello event poll"))
+
+	// дана строка символов A. найти N слово, и повторить его M Раз
+	fmt.Print(ModifyMultiply("hello every vodu nay", 2, 4))
+}
+
+func ModifyMultiply(str string, loc, num int) string {
+	var stroki []string = strings.Split(str, " ")
+	var result string
+
+	for i := 0; i < num; i++ {
+		result += stroki[loc] + "-"
+	}
+
+	result = result[:len(result)-1]
+	return result
+}
+
+func GetCount(str string) (count int) {
+
+	for _, i := range str {
+		if i == 'u' || i == 'e' || i == 'a' || i == 'o' || i == 'i' {
+			count++
+		}
+
+		// switch i {
+		// case 'a', 'e', 'i', 'o', 'u':
+		//   count++
+		// }
+	}
+
+	return
 }
 
 // создаем переменную вывода сразу в функции, и нагружаем её
