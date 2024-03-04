@@ -106,7 +106,33 @@ func MainA() {
 	//fmt.Print(GetCount("hello event poll"))
 
 	// дана строка символов A. найти N слово, и повторить его M Раз
-	fmt.Print(ModifyMultiply("hello every vodu nay", 2, 4))
+	//fmt.Print(ModifyMultiply("hello every vodu nay", 2, 4))
+
+	// реверснуть массив чисел
+	// var mass = ReverseList([]int{3, 5, 6, 7, 8})
+	// for _, element := range mass {
+	// 	fmt.Println(element)
+	// }
+
+	// все буквы в ловер кейс
+	fmt.Print(toLowerCase("HELLo"))
+}
+
+func toLowerCase(s string) (result string) {
+	for _, i := range s {
+		result += string(unicode.ToLower(i))
+	}
+
+	return result
+	// return strings.ToLower(s)
+}
+
+func ReverseList(lst []int) (result []int) {
+	for i := len(lst) - 1; i >= 0; i-- {
+		result = append(result, lst[i])
+	}
+
+	return result
 }
 
 func ModifyMultiply(str string, loc, num int) string {
