@@ -115,7 +115,76 @@ func MainA() {
 	// }
 
 	// все буквы в ловер кейс
-	fmt.Print(toLowerCase("HELLo"))
+	//fmt.Print(toLowerCase("HELLo"))
+
+	// отсортировать людей по росту
+	// var mass = sortPeople([]string{"Mary", "John", "Emma"}, []int{180, 165, 170})
+	// for _, element := range mass {
+	// 	fmt.Println(element)
+	// }
+
+	// найти количество четных чисел в массиве
+	fmt.Print(findNumbers([]int{12, 345, 2, 6, 7896}))
+}
+
+func findNumbers(nums []int) (result int) {
+
+	// !!!! long duration !!!!
+	// for _, i := range nums {
+	// 	if len(strconv.Itoa(i))%2 == 0 {
+	// 		result++
+	// 	}
+	// }
+	// return
+
+	for _, i := range nums {
+		if cheakNumEven(i) {
+			result++
+		}
+	}
+	return
+}
+
+func cheakNumEven(nums int) bool {
+
+	var lenCount int = 0
+	for nums >= 1 {
+		nums = nums / 10
+		lenCount++
+	}
+
+	return lenCount%2 == 0
+
+}
+
+func sortPeople(names []string, heights []int) (result []string) {
+
+	// создаем структуру, чтобы данные были в одном месте
+	type people struct {
+		name   string
+		height int
+	}
+
+	// добавляем данные в одну структуры
+	tempStruct := make([]people, 0, len(names))
+	for i := 0; i < len(names); i++ {
+		tempCur := people{
+			name:   names[i],
+			height: heights[i],
+		}
+		tempStruct = append(tempStruct, tempCur)
+	}
+
+	// делаем кастомную сортировку лямбдой
+	sort.Slice(tempStruct, func(i, j int) bool { return tempStruct[i].height > tempStruct[j].height })
+
+	// вытаскиваем данные в переменную result
+	for _, i := range tempStruct {
+		result = append(result, i.name)
+	}
+
+	return
+
 }
 
 func toLowerCase(s string) (result string) {
