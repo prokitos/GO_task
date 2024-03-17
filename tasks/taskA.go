@@ -124,7 +124,58 @@ func MainA() {
 	// }
 
 	// найти количество четных чисел в массиве
-	fmt.Print(findNumbers([]int{12, 345, 2, 6, 7896}))
+	//fmt.Print(findNumbers([]int{12, 345, 2, 6, 7896}))
+
+	// дан массив из N чифр, вернуть все различные комбинации из этих чисел
+	var nums []int = []int{1, 2, 3}
+	temper := permute(nums)
+	for _, i := range temper {
+		for _, j := range i {
+			fmt.Print(j)
+		}
+		fmt.Println()
+	}
+
+}
+
+func permuteSupport(res *[][]int, val []int, position int) {
+
+	// выполнять рукурсии до тех пор, пока вложенность рекурсии не дойдёт до количества цифр в комбинации
+	if position == len(val) {
+		return
+	}
+
+	// перебор по возможным вариациям
+	for i := 0; i <= position; i++ {
+
+		// создаем копию пришедших чисел, и делаем их новым объектом, чтобы массив не состоял из ссылок друг на друга
+		valCopy := make([]int, len(val))
+		copy(valCopy, val)
+
+		// аналог swap из c++. меняем местами два элемента во временном массиве
+		valCopy[i], valCopy[position] = valCopy[position], valCopy[i]
+
+		// запускаем новый круг рекурсии, но с углубленностью + 1, и отправляем временный свапнутый массив
+		permuteSupport(res, valCopy, position+1)
+
+		// уникальное условие, которое игнорирует одинаковые числа на каждой итерации в углубленности рекурсии. и только потом добавляет это число в список результата
+		if position > len(val)-2 {
+			*res = append(*res, valCopy)
+		}
+
+	}
+
+	// после перебора фор выход из функции
+	return
+}
+
+func permute(nums []int) [][]int {
+	var result [][]int
+
+	// начинаем рекурсию, с углубленостью 0. не надо ничего возвращать так как передаем ссылку
+	permuteSupport(&result, nums, 0)
+
+	return result
 }
 
 func findNumbers(nums []int) (result int) {
