@@ -127,15 +127,47 @@ func MainA() {
 	//fmt.Print(findNumbers([]int{12, 345, 2, 6, 7896}))
 
 	// дан массив из N чифр, вернуть все различные комбинации из этих чисел
-	var nums []int = []int{1, 2, 3}
-	temper := permute(nums)
-	for _, i := range temper {
-		for _, j := range i {
-			fmt.Print(j)
+	// var nums []int = []int{1, 2, 3}
+	// temper := permute(nums)
+	// for _, i := range temper {
+	// 	for _, j := range i {
+	// 		fmt.Print(j)
+	// 	}
+	// 	fmt.Println()
+	// }
+
+	// Дано предложение, вывести количество слов которые не содержат больших букв, или содержат только первую большую букву
+	var stroka string = "hello How aRe you CoNtestant"
+	fmt.Print(calculateValideWord(stroka)) // 3, hello How you
+
+}
+
+func calculateValideWord(input string) int {
+	var result int = 0
+
+	mass := strings.Fields(input)
+	for i := 0; i < len(mass); i++ {
+		var counter int = 0
+		temp := mass[i]
+
+		for j := 0; j < len(mass[i]); j++ {
+			if unicode.ToUpper(rune(temp[j])) == rune(temp[j]) {
+
+				counter++
+				if j > 0 {
+					counter++
+					break
+				}
+
+			}
 		}
-		fmt.Println()
+
+		if counter < 2 {
+			result++
+		}
 	}
 
+	return result
 }
 
 func permuteSupport(res *[][]int, val []int, position int) {
