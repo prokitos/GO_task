@@ -137,9 +137,54 @@ func MainA() {
 	// }
 
 	// Дано предложение, вывести количество слов которые не содержат больших букв, или содержат только первую большую букву
-	var stroka string = "hello How aRe you CoNtestant"
-	fmt.Print(calculateValideWord(stroka)) // 3, hello How you
+	// var stroka string = "hello How aRe you CoNtestant"
+	// fmt.Print(calculateValideWord(stroka)) // 3, hello How you
 
+	// проверить что строка является окронимом массива слов
+	// var stroka []string = []string{"alice", "bob", "charlie"}
+	// fmt.Print(isAcronym(stroka, "abc"))
+
+	// найти произведение (двух максимальных чисел - 1)
+	fmt.Print(maxProduct([]int{3, 4, 5, 2}))
+}
+
+func maxProduct(nums []int) int {
+	if len(nums) < 2 {
+		return 0
+	}
+
+	var first int = nums[0]
+	var second int = nums[1]
+
+	for i := 2; i < len(nums); i++ {
+		cur := nums[i]
+		min := min(first, second)
+		max := max(first, second)
+
+		if cur > min {
+			min = cur
+			first = min
+			second = max
+		}
+
+	}
+
+	return (first - 1) * (second - 1)
+}
+
+func isAcronym(words []string, s string) bool {
+
+	if len(words) != len(s) {
+		return false
+	}
+
+	for i, j := range words {
+		if j[0] != s[i] {
+			return false
+		}
+	}
+
+	return true
 }
 
 func calculateValideWord(input string) int {
