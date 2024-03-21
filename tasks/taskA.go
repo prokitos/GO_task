@@ -145,7 +145,29 @@ func MainA() {
 	// fmt.Print(isAcronym(stroka, "abc"))
 
 	// найти произведение (двух максимальных чисел - 1)
-	fmt.Print(maxProduct([]int{3, 4, 5, 2}))
+	// fmt.Print(maxProduct([]int{3, 4, 5, 2}))
+
+	// заменить цифры в строке на символы. цифра меняется на прошлую букву + эта цифра
+	fmt.Println(replaceDigits("a1b2c")) // = abbdc
+}
+
+func replaceDigits(s string) string {
+
+	// так как строки изменять нельзя, делаем массив рун
+	str := []rune(s)
+
+	for i := 0; i < len(s); i++ {
+
+		// если попалась цифра, то
+		if s[i] >= '0' && s[i] <= '9' {
+			// берем прошлую букву, и складываем с текущей цифрой (которая получилось при отнимании нуля)
+			temp := int(s[i-1]) + int(s[i]-'0')
+			str[i] = rune(temp)
+		}
+	}
+
+	// конвертим руны в строку и возвращаем
+	return string(str)
 }
 
 func maxProduct(nums []int) int {
