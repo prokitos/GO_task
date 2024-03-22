@@ -148,7 +148,28 @@ func MainA() {
 	// fmt.Print(maxProduct([]int{3, 4, 5, 2}))
 
 	// заменить цифры в строке на символы. цифра меняется на прошлую букву + эта цифра
-	fmt.Println(replaceDigits("a1b2c")) // = abbdc
+	// fmt.Println(replaceDigits("a1b2c")) // = abbdc
+
+	// сортировать строку в порядке цифр
+	fmt.Print(sortSentence("is2 sentence4 This1 a3"))
+}
+
+func sortSentence(s string) string {
+	mass := strings.Fields(s)
+	massResult := make([]string, len(mass))
+
+	for _, item := range mass {
+		temp := []rune(item)
+		for i := 0; i < len(temp); i++ {
+			num := temp[i] - '0'
+			if num >= 0 && num <= 9 {
+				temp = temp[:len(temp)-1]
+				massResult[num-1] = string(temp)
+			}
+		}
+	}
+
+	return strings.Join(massResult, " ")
 }
 
 func replaceDigits(s string) string {
