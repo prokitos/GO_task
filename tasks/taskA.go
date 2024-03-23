@@ -151,7 +151,38 @@ func MainA() {
 	// fmt.Println(replaceDigits("a1b2c")) // = abbdc
 
 	// сортировать строку в порядке цифр
-	fmt.Print(sortSentence("is2 sentence4 This1 a3"))
+	// fmt.Print(sortSentence("is2 sentence4 This1 a3"))
+
+	// отсортировать массив чтобы сначала шли четные а потом нечетные
+	nums := []int{3, 1, 2, 4}
+	temp := sortArrayByParity(nums)
+	for _, i := range temp {
+		fmt.Print(i)
+	}
+}
+
+func sortArrayByParity(nums []int) []int {
+
+	// сортировка лямбдой
+	// sort.Slice(nums, func(i, j int) bool { return nums[i]%2 == 0 })
+	// return nums
+
+	// сортировка в ручную
+	result := make([]int, len(nums))
+	first := 0
+	last := len(nums) - 1
+
+	for _, i := range nums {
+		if i%2 == 0 {
+			result[first] = i
+			first++
+		} else {
+			result[last] = i
+			last--
+		}
+	}
+
+	return result
 }
 
 func sortSentence(s string) string {
