@@ -154,11 +154,23 @@ func MainA() {
 	// fmt.Print(sortSentence("is2 sentence4 This1 a3"))
 
 	// отсортировать массив чтобы сначала шли четные а потом нечетные
-	nums := []int{3, 1, 2, 4}
-	temp := sortArrayByParity(nums)
-	for _, i := range temp {
-		fmt.Print(i)
-	}
+	// nums := []int{3, 1, 2, 4}
+	// temp := sortArrayByParity(nums)
+	// for _, i := range temp {
+	// 	fmt.Print(i)
+	// }
+
+	// умножить два самых больших числа и два самых маленьких, и найти разницу.
+	fmt.Print(maxProductDifference([]int{3, 1, 2, 4}))
+}
+
+func maxProductDifference(nums []int) int {
+	sort.Ints(nums)
+
+	left := nums[0] * nums[1]
+	rigth := nums[len(nums)-1] * nums[len(nums)-2]
+
+	return rigth - left
 }
 
 func sortArrayByParity(nums []int) []int {
