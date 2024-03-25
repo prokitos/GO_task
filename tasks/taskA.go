@@ -2,6 +2,7 @@ package tasks
 
 import (
 	"fmt"
+	"math"
 	"regexp"
 	"sort"
 	"strconv"
@@ -161,16 +162,45 @@ func MainA() {
 	// }
 
 	// умножить два самых больших числа и два самых маленьких, и найти разницу.
-	fmt.Print(maxProductDifference([]int{3, 1, 2, 4}))
+	fmt.Print(maxProductDifference([]int{3, 2, 2, 4}))
 }
 
 func maxProductDifference(nums []int) int {
-	sort.Ints(nums)
 
-	left := nums[0] * nums[1]
-	rigth := nums[len(nums)-1] * nums[len(nums)-2]
+	// sort.Ints(nums)
+	// left := nums[0] * nums[1]
+	// rigth := nums[len(nums)-1] * nums[len(nums)-2]
+	// return rigth - left
 
-	return rigth - left
+	var max []int = []int{math.MinInt32, math.MinInt32} // по стандарту минимальное значение инта
+	var min []int = []int{math.MaxInt32, math.MaxInt32} // по стандарту максимальное значение инта
+
+	//  чтобы не делать минимальное и максимальное по стандарту, можно вначале обработать первые 4 элемента массива
+	// и распределить его в мин или макс массив.
+
+	if len(nums) < 4 {
+		return 0
+	}
+
+	for i := 0; i < len(nums); i++ {
+
+		if nums[i] >= max[1] {
+			max[0] = max[1]
+			max[1] = nums[i]
+		} else if nums[i] >= max[0] {
+			max[0] = nums[i]
+		}
+
+		if nums[i] <= min[1] {
+			min[0] = min[1]
+			min[1] = nums[i]
+		} else if nums[i] <= min[0] {
+			min[0] = nums[i]
+		}
+
+	}
+
+	return max[0]*max[1] - min[0]*min[1]
 }
 
 func sortArrayByParity(nums []int) []int {
