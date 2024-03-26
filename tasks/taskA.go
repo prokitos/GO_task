@@ -162,7 +162,81 @@ func MainA() {
 	// }
 
 	// умножить два самых больших числа и два самых маленьких, и найти разницу.
-	fmt.Print(maxProductDifference([]int{3, 2, 2, 4}))
+	// fmt.Print(maxProductDifference([]int{3, 2, 2, 4}))
+
+	// проверка числа на полиндром
+	// fmt.Print(isPalindrome(-1221))
+
+	// совместить 2 листа в один
+	var Flist3 ListNode
+	Flist3.Val = 4
+	Flist3.Next = nil
+	var Flist2 ListNode
+	Flist2.Val = 2
+	Flist2.Next = &Flist3
+	var Flist1 ListNode
+	Flist1.Val = 1
+	Flist1.Next = &Flist2
+
+	var Slist3 ListNode
+	Slist3.Val = 4
+	Slist3.Next = nil
+	var Slist2 ListNode
+	Slist2.Val = 3
+	Slist2.Next = &Slist3
+	var Slist1 ListNode
+	Slist1.Val = 1
+	Slist1.Next = &Slist2
+
+	temp := mergeTwoLists(&Slist1, &Flist1)
+
+	// do while print loop
+	for {
+		fmt.Println(temp.Val)
+		if temp.Next == nil {
+			break
+		}
+		temp = temp.Next
+	}
+
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// рекурсивный метод
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+
+	if list1 == nil {
+		return list2
+	}
+	if list2 == nil {
+		return list1
+	}
+
+	if list1.Val < list2.Val {
+		list1.Next = mergeTwoLists(list1.Next, list2)
+		return list1
+	}
+
+	list2.Next = mergeTwoLists(list1, list2.Next)
+	return list2
+
+}
+
+func isPalindrome(x int) bool {
+	var temp string = strconv.Itoa(x)
+	var dlina int = len(temp)
+
+	for i := 0; i < dlina/2; i++ {
+		if temp[i] != temp[dlina-i-1] {
+			return false
+		}
+	}
+
+	return true
 }
 
 func maxProductDifference(nums []int) int {
