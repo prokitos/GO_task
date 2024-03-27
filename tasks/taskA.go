@@ -168,9 +168,44 @@ func MainA() {
 	// fmt.Print(isPalindrome(-1221))
 
 	// совместить 2 листа в один
+	// var Flist3 ListNode
+	// Flist3.Val = 4
+	// Flist3.Next = nil
+	// var Flist2 ListNode
+	// Flist2.Val = 2
+	// Flist2.Next = &Flist3
+	// var Flist1 ListNode
+	// Flist1.Val = 1
+	// Flist1.Next = &Flist2
+
+	// var Slist3 ListNode
+	// Slist3.Val = 4
+	// Slist3.Next = nil
+	// var Slist2 ListNode
+	// Slist2.Val = 3
+	// Slist2.Next = &Slist3
+	// var Slist1 ListNode
+	// Slist1.Val = 1
+	// Slist1.Next = &Slist2
+
+	// temp := mergeTwoLists(&Slist1, &Flist1)
+
+	// // do while print loop
+	// for {
+	// 	fmt.Println(temp.Val)
+	// 	if temp.Next == nil {
+	// 		break
+	// 	}
+	// 	temp = temp.Next
+	// }
+
+	// удалить N элемент из листа с конца
+	var Flist4 ListNode
+	Flist4.Val = 7
+	Flist4.Next = nil
 	var Flist3 ListNode
 	Flist3.Val = 4
-	Flist3.Next = nil
+	Flist3.Next = &Flist4
 	var Flist2 ListNode
 	Flist2.Val = 2
 	Flist2.Next = &Flist3
@@ -178,18 +213,7 @@ func MainA() {
 	Flist1.Val = 1
 	Flist1.Next = &Flist2
 
-	var Slist3 ListNode
-	Slist3.Val = 4
-	Slist3.Next = nil
-	var Slist2 ListNode
-	Slist2.Val = 3
-	Slist2.Next = &Slist3
-	var Slist1 ListNode
-	Slist1.Val = 1
-	Slist1.Next = &Slist2
-
-	temp := mergeTwoLists(&Slist1, &Flist1)
-
+	temp := removeNthFromEnd(&Flist1, 3) // убрать 3 элемент с конца. 7 4 1
 	// do while print loop
 	for {
 		fmt.Println(temp.Val)
@@ -199,11 +223,57 @@ func MainA() {
 		temp = temp.Next
 	}
 
+	// убрать повторения из массива, и отправить количество итоговых элементов
+	// fmt.Println(removeDuplicates([]int{0, 0, 5, 1, 1, 1, 2, 2, 5, 3, 3, 4})) // 6
+
+}
+
+func removeDuplicates(nums []int) int {
+	temp := make(map[int]int)
+
+	for _, i := range nums {
+		temp[i]++
+	}
+
+	return len(temp)
 }
 
 type ListNode struct {
 	Val  int
 	Next *ListNode
+}
+
+func removeNthFromEnd(head *ListNode, n int) *ListNode {
+
+	var listLen int = 0
+	var temp *ListNode = head
+
+	for {
+		listLen++
+		if temp == nil {
+			break
+		}
+		temp = temp.Next
+	}
+
+	listLen -= n + 1
+	temp = head
+
+	for {
+		listLen--
+		if listLen <= 0 {
+			if listLen == 0 {
+				temp.Next = temp.Next.Next
+			}
+			if listLen < 0 {
+				*temp = *temp.Next
+			}
+			break
+		}
+		temp = temp.Next
+	}
+
+	return head
 }
 
 // рекурсивный метод
