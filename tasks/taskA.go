@@ -200,32 +200,98 @@ func MainA() {
 	// }
 
 	// удалить N элемент из листа с конца
-	var Flist4 ListNode
-	Flist4.Val = 7
-	Flist4.Next = nil
-	var Flist3 ListNode
-	Flist3.Val = 4
-	Flist3.Next = &Flist4
-	var Flist2 ListNode
-	Flist2.Val = 2
-	Flist2.Next = &Flist3
-	var Flist1 ListNode
-	Flist1.Val = 1
-	Flist1.Next = &Flist2
+	// var Flist4 ListNode
+	// Flist4.Val = 7
+	// Flist4.Next = nil
+	// var Flist3 ListNode
+	// Flist3.Val = 4
+	// Flist3.Next = &Flist4
+	// var Flist2 ListNode
+	// Flist2.Val = 2
+	// Flist2.Next = &Flist3
+	// var Flist1 ListNode
+	// Flist1.Val = 1
+	// Flist1.Next = &Flist2
 
-	temp := removeNthFromEnd(&Flist1, 3) // убрать 3 элемент с конца. 7 4 1
-	// do while print loop
-	for {
-		fmt.Println(temp.Val)
-		if temp.Next == nil {
-			break
-		}
-		temp = temp.Next
-	}
+	// temp := removeNthFromEnd(&Flist1, 3) // убрать 3 элемент с конца. 7 4 1
+	// // do while print loop
+	// for {
+	// 	fmt.Println(temp.Val)
+	// 	if temp.Next == nil {
+	// 		break
+	// 	}
+	// 	temp = temp.Next
+	// }
 
 	// убрать повторения из массива, и отправить количество итоговых элементов
 	// fmt.Println(removeDuplicates([]int{0, 0, 5, 1, 1, 1, 2, 2, 5, 3, 3, 4})) // 6
 
+	// посчитать длину последнего слова из предложения
+	// fmt.Print(lengthOfLastWord("luffy is still joyboy"))
+
+	// дан массив из цифр от 0 до 9. прибавить 1 к последней цифре, и пересчитать весь массив.  [1,9] = [1,9+1] = [1,10] = [2,0]
+	nums := []int{9, 9}
+	temp := plusOne(nums)
+	for _, i := range temp {
+		fmt.Print(i)
+	}
+}
+
+func plusOne(digits []int) []int {
+
+	// // увеличиваем последнее на 1
+	// digits[len(digits)-1]++
+	// // временная переменная для передачи 1 единицы влево
+	// var temp bool = false
+
+	// for i := len(digits) - 1; i >= 0; i-- {
+
+	// 	// если единица переносится с прошлого числа
+	// 	if temp == true {
+	// 		digits[i]++
+	// 		temp = false
+	// 	}
+
+	// 	// если число больше 9
+	// 	if digits[i] == 10 {
+	// 		digits[i] = 0
+	// 		temp = true
+	// 	}
+	// }
+
+	// if temp == true {
+	// 	var res = make([]int, len(digits)+1)
+	// 	res[0] = 1
+	// 	return res
+	// }
+
+	// return digits
+
+	// длина массива используется несколько раз. чтобы не дергать функцию, лучше записать значение в переменную.
+	var masLen = len(digits)
+
+	for i := masLen - 1; i >= 0; i-- {
+
+		// если текущая цифра меньше 9, то при прибавлении будет меньше 10. значит прибавляем и возвращаем значение
+		if digits[i] < 9 {
+			digits[i]++
+			return digits
+		} else {
+			// иначе текущая цифра 9, и при прибавлении будет 10. значит записываем ноль, идем на следующий круг и прибавляем 1 к следующему элементу
+			digits[i] = 0
+		}
+
+	}
+
+	// а если вышло из цикла, значит первое число больше 10, но единицу некуда вынести. делаем копию массива со всеми нулями, и вначало добавляем 1
+	var res = make([]int, masLen+1)
+	res[0] = 1
+	return res
+}
+
+func lengthOfLastWord(s string) int {
+	mass := strings.Fields(s)
+	return len(mass[len(mass)-1])
 }
 
 func removeDuplicates(nums []int) int {
