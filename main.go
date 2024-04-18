@@ -11,7 +11,10 @@ func main() {
 	// tasks.MainB()
 	// tasks.MainC()
 	// tasks.MainD2()
-	tasks.MainE()
+	// tasks.MainE()
+	tasks.MainF()
 	//fmt.Scan()
+
+	fmt.Println("end of programm")
 
 }
