@@ -33,6 +33,37 @@ func cPointer() {
 	fmt.Println("----------------------")
 
 	mapAndSliceTest()
+	testTransfer()
+}
+
+func testTransfer() {
+	var testArray [50]int
+	testArray[0] = 101
+	arrayChanger(testArray)
+	fmt.Println(testArray[0])
+
+	maper := make(map[int]int)
+	maper[0] = 101
+	mapChanger(maper)
+	fmt.Println(maper[0])
+
+	var testSlice []int = make([]int, 100)
+	testSlice[0] = 101
+	sliceChanger(testSlice)
+	fmt.Println(testSlice[0])
+
+}
+
+func mapChanger(input map[int]int) {
+	input[0] = 102
+}
+
+func arrayChanger(input [50]int) {
+	input[0] = 102
+}
+
+func sliceChanger(input []int) {
+	input[0] = 102
 }
 
 func mapAndSliceTest() {

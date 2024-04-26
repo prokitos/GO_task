@@ -3,7 +3,7 @@ package construct
 import "fmt"
 
 func cDefers() {
-	//panicReconver()
+	// panicReconver()
 	printTest()
 }
 
