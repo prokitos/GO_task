@@ -4,59 +4,39 @@ import "fmt"
 
 func MainF() {
 
-	smartBase := Smartphone{"basic smart"}
+	// дана последовательность букв. найти самую большую длину последовательности, в которой буквы не повторяются.
 
-	// изначально оба гика ссылаются на одно и тоже значение
-	geek1 := Geek{&smartBase}
-	geek2 := Geek{&smartBase}
-	fmt.Println("----------------------")
-	fmt.Println(geek1.smartphone.name)
-	fmt.Println(geek2.smartphone.name)
+	var temp string = "abcabvgcdfbaf"
+	var fast int = 0
+	var slow int = 0
+	var res int = 0
+	var totalRes int = 0
 
-	// мы пытаемся поменять указатель внутри функции, но не получается
-	poorReplace(geek1.smartphone)
-	fmt.Println("----------------------")
-	fmt.Println(geek1.smartphone.name)
-	fmt.Println(geek2.smartphone.name)
+	curSet := make(map[int]emptyStruct)
 
-	// мы меняем оригинальное значение, на которое ссылается указатель, поэтому у всех гигов теперь другой телефон
-	basicReplace(geek1.smartphone)
-	fmt.Println("----------------------")
-	fmt.Println(geek1.smartphone.name)
-	fmt.Println(geek2.smartphone.name)
+	for fast < len(temp) {
+		fastChar := temp[fast]
+		slowChar := temp[slow]
+		_, ok := curSet[int(fastChar)]
 
-	// мы меняем ссылку на значение у указателя, и он теперь ссылается другую область в памяти, поэтому телефон меняется только у одного гика
-	coolReplace(&geek2.smartphone)
-	fmt.Println("----------------------")
-	fmt.Println(geek1.smartphone.name)
-	fmt.Println(geek2.smartphone.name)
-	fmt.Println("----------------------")
+		// если уже есть такое значение в сете
+		if ok {
+			delete(curSet, int(slowChar))
+			res--
+			slow++
+		} else {
+			curSet[int(fastChar)] = emptyStruct{}
+			res++
+			fast++
+		}
+		if totalRes < res {
+			totalRes = res
+		}
+	}
+
+	// ответ 7.   a b c (a b v g c d f) b a f
+	fmt.Println(totalRes)
 
 }
 
-// есть некий смартфон
-type Smartphone struct {
-	name string
-}
-
-// гик носит некий смартфон
-type Geek struct {
-	smartphone *Smartphone
-}
-
-// при передаче любого параметра в функцию, мы передаем его копию
-
-// мы пытаемся поменять копию указателя, и в итоге в оригинале ничего не меняется
-func poorReplace(s *Smartphone) {
-	s = &Smartphone{"poor smart"}
-}
-
-// здесь мы перетираем оригинальные значенния obichniy на krutoi, и указатель указывает на тоже место в памяти.
-func basicReplace(s *Smartphone) {
-	*s = Smartphone{"normal smart"}
-}
-
-// здесь мы выделяем новую область памяти для krutoi, и наш указатель указывает на новую область памяти.
-func coolReplace(s **Smartphone) {
-	*s = &Smartphone{"cool smart"}
-}
+type emptyStruct struct{}
