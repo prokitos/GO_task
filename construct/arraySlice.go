@@ -1,6 +1,8 @@
 package construct
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func cSliceArray() {
 
@@ -26,6 +28,11 @@ func cSliceArray() {
 	a1 = append(a1, a2...)
 	fmt.Println(a1)
 
+	massTest("a", []string{"a", "b", "c"})
+	massTest(5, []int{1, 2, 3})
+	massTest(5, []int{1, 2, 5})
+
+	genTest("z", []int{1, 2, 3})
 }
 
 func testArray(input ...string) {
@@ -36,4 +43,32 @@ func testArray(input ...string) {
 func testArray2(input []string) {
 	input = append(input, "kalina")
 	fmt.Println(input)
+}
+
+// проверка есть ли значение в слайсе
+func massTest[T comparable](val T, values []T) {
+	for _, i := range values {
+		if val == i {
+			fmt.Println("its contain value in slice")
+			return
+		}
+	}
+
+	fmt.Println("no value in slice")
+}
+
+// тест дженериков
+func genTest[T any, U any](val U, values []T) {
+
+	// переводим букву z в строку, а потом в число
+	var len = len(values)
+	comp := fmt.Sprintf("%+v", val)
+	cmp := []byte(comp)
+
+	if int(cmp[0]) > len {
+		fmt.Println("bigger")
+	} else {
+		fmt.Println("smaller")
+	}
+
 }

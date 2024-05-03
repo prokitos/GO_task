@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"moduleA/tasks"
+	"moduleA/construct"
 )
 
 func main() {
@@ -12,10 +12,10 @@ func main() {
 	// tasks.MainC()
 	// tasks.MainD2()
 	// tasks.MainE()
-	tasks.MainF()
+	// tasks.MainF()
 	//fmt.Scan()
 
-	//construct.MainConstruct()
+	construct.MainConstruct()
 
 	fmt.Println("end of programm")
 

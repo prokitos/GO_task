@@ -52,6 +52,12 @@ func testTransfer() {
 	sliceChanger(testSlice)
 	fmt.Println(testSlice[0])
 
+	// мапы можно делать без мейка
+	var testMaps = map[int]int{}
+	testMaps[0] = 0
+	var testMap = map[int]int{1: 15, 2: 17}
+	fmt.Println(testMap[1])
+
 }
 
 func mapChanger(input map[int]int) {
