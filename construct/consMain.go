@@ -4,6 +4,7 @@ func MainConstruct() {
 	// cPointer()
 	// cContext()
 	// cGoroutines()
-	cSliceArray()
+	//cSliceArray()
 	// cDefers()
+	cInterfaces()
 }
