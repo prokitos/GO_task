@@ -1,10 +1,12 @@
 package construct
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func cInterfaces() {
-	interfOne()
-	// interfTwo()
+	//interfOne()
+	interfTwo()
 	//  interfThr()
 }
 
@@ -49,23 +51,35 @@ func (a *BaseAccount) GetBalance() float64 {
 
 func interfTwo() {
 	tesla := Car{name: "tesla"}
-	drive(tesla) // в этом месте
+	drive(tesla, 100)
+
+	br450 := Airplane{name: "airbus", target: "london"}
+	drive(br450, 400)
 }
 
 type Vehicle interface {
-	move()
+	move(speed int)
 }
 
 type Car struct {
 	name string
 }
-
-func drive(veh Vehicle) {
-	veh.move()
+type Airplane struct {
+	name   string
+	target string
 }
 
-func (c Car) move() {
-	fmt.Println("car goes!!" + c.name)
+func drive(veh Vehicle, speed int) {
+	veh.move(speed)
+}
+
+func (c Car) move(speed int) {
+	res := fmt.Sprintf("%s goes at speed %d", c.name, speed)
+	fmt.Println(res)
+}
+func (a Airplane) move(speed int) {
+	res := fmt.Sprintf("%s fly to %s at %d", a.name, a.target, speed)
+	fmt.Println(res)
 }
 
 /////////////////////////////////////////////////////////////////////
