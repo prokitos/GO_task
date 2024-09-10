@@ -1,6 +1,8 @@
 package tasks
 
 import (
+	"bytes"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -14,7 +16,31 @@ func MainG() {
 	// duplicateEncode("recede")
 
 	// в квадрат числа от 0 до первого X, потом посчитать сколько цифр от второго Y во всех полученных квадратах.
-	nbDig(20, 3) // передаём число X и цифру Y
+	// nbDig(5, 3) // передаём число X и цифру Y
+
+	// factorial(10)
+
+	// приходит рецепт и наши текущие продукты. нужно посчитать сколько тортов можно испечь.
+	// cakes(map[string]int{"flour": 500, "sugar": 200, "eggs": 1}, map[string]int{"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200})
+
+	// сделать из прямоугольника со сторонами X Y = квадраты со сторонами M
+	fmt.Println(squaresInRect(4, 4))
+}
+
+func squaresInRect(lng int, wdth int) []int {
+	var res []int
+	if lng == wdth {
+		return res
+	}
+	for lng != wdth {
+		if lng < wdth {
+			wdth, lng = lng, wdth
+		}
+		res = append(res, wdth)
+		lng = lng - wdth
+	}
+	res = append(res, wdth)
+	return res
 }
 
 func deadFish(input string) []int {
@@ -61,9 +87,10 @@ func duplicateEncode(word string) string {
 }
 
 func nbDig(n int, d int) int {
+	// слишком долго.
 	// var allNumber string
 	// var result int
-	// for i := 0; i < n; i++ {
+	// for i := 0; i <= n; i++ {
 	// 	allNumber += strconv.Itoa(i * i)
 	// }
 	// for _, items := range allNumber {
@@ -73,16 +100,48 @@ func nbDig(n int, d int) int {
 	// }
 	// return result
 
+	// быстрее
+	var buffer bytes.Buffer
 	var result int
-
 	for i := 0; i <= n; i++ {
-		allNumber := strconv.Itoa(i * i)
-		for _, items := range allNumber {
-			if string(items) == strconv.Itoa(d) {
-				result++
-			}
+		buffer.WriteString(strconv.Itoa(i * i))
+	}
+	for _, items := range buffer.String() {
+		if string(items) == strconv.Itoa(d) {
+			result++
 		}
+	}
+	return result
 
+	// без записи всего в одну строку
+	// var result int
+	// for i := 0; i <= n; i++ {
+	// 	allNumber := strconv.Itoa(i * i)
+	// 	for _, items := range allNumber {
+	// 		if string(items) == strconv.Itoa(d) {
+	// 			result++
+	// 		}
+	// 	}
+	// }
+	// return result
+}
+
+func factorial(n int) int {
+	var result int = 1
+	for i := 1; i <= n; i++ {
+		result *= i
+	}
+	return result
+}
+
+func cakes(recipe, available map[string]int) int {
+	var result int = -1
+
+	for keys := range recipe {
+		var temp = available[keys] / recipe[keys]
+		if temp < result || result < 0 {
+			result = temp
+		}
 	}
 
 	return result
