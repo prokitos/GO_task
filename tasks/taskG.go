@@ -3,6 +3,8 @@ package tasks
 import (
 	"bytes"
 	"fmt"
+	"math"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -24,7 +26,93 @@ func MainG() {
 	// cakes(map[string]int{"flour": 500, "sugar": 200, "eggs": 1}, map[string]int{"flour": 1200, "sugar": 1200, "eggs": 5, "milk": 200})
 
 	// сделать из прямоугольника со сторонами X Y = квадраты со сторонами M
-	fmt.Println(squaresInRect(4, 4))
+	// fmt.Println(squaresInRect(4, 4))
+
+	// дано время для нескольких участников. найти разницу между большим и меньшим временем, среднее время, и медиану.
+	fmt.Println(stati("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
+}
+
+// 01|01|18 Average: 01|38|05 Median: 01|32|34
+func stati(strg string) string {
+
+	if strg == "" {
+		return ""
+	}
+
+	allTeams := strings.Split(strg, ",")
+	var allTeamsInt []int
+	var resRanges int
+	var resAverge int
+	var resMedian int
+	var maxLen int = len(allTeams)
+
+	for _, items := range allTeams {
+		newItem := strings.Split(items, "|")
+		var val int = 0
+		for iter, curval := range newItem {
+			temp, _ := strconv.Atoi(strings.TrimSpace(curval))
+			var pow int = int(math.Pow(60, float64(2-iter)))
+			val += temp * pow
+		}
+		//val := hmsToNumber(temp) // вместо цикла внутри цикла
+		resAverge += val
+		allTeamsInt = append(allTeamsInt, val)
+	}
+
+	sort.Ints(allTeamsInt)
+
+	if len(allTeamsInt)%2 == 0 {
+		resMedian = (allTeamsInt[maxLen/2] + allTeamsInt[maxLen/2-1]) / 2
+
+	} else {
+		resMedian = allTeamsInt[maxLen/2]
+	}
+
+	resRanges = allTeamsInt[maxLen-1] - allTeamsInt[0]
+	resAverge = resAverge / maxLen
+
+	// response := "Range: " + numberToHms(resRanges) + " Average: " + numberToHms(resAverge) + " Median: " + numberToHms(resMedian)
+	response := fmt.Sprintf("Range: %s Average: %s Median: %s", numberToHms(resRanges), numberToHms(resAverge), numberToHms(resMedian))
+	return response
+}
+
+//	func hmsToNumber(value []string) int {
+//		// можно было в основной функции в цикле считать сразу
+//		var resTime int = 0
+//		temp, _ := strconv.Atoi(strings.TrimSpace(value[2]))
+//		resTime += temp
+//		temp, _ = strconv.Atoi(strings.TrimSpace(value[1]))
+//		resTime += temp * 60
+//		temp, _ = strconv.Atoi(strings.TrimSpace(value[0]))
+//		resTime += temp * 60 * 60
+//		return resTime
+//	}
+func numberToHms(value int) string {
+
+	return fmt.Sprintf("%02d|%02d|%02d", value/3600, (value%3600)/60, value%60)
+
+	// var result string
+	// times := value
+	// temp := times / 60 / 60
+	// if temp < 10 {
+	// 	result += "0" + strconv.Itoa(temp) + "|"
+	// } else {
+	// 	result += strconv.Itoa(temp) + "|"
+	// }
+	// times -= temp * 60 * 60
+	// temp = times / 60
+	// if temp < 10 {
+	// 	result += "0" + strconv.Itoa(temp) + "|"
+	// } else {
+	// 	result += strconv.Itoa(temp) + "|"
+	// }
+	// times -= temp * 60
+	// if times < 10 {
+	// 	result += "0" + strconv.Itoa(times)
+	// } else {
+	// 	result += strconv.Itoa(times)
+	// }
+	// return result
 }
 
 func squaresInRect(lng int, wdth int) []int {
