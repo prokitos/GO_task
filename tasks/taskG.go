@@ -29,7 +29,42 @@ func MainG() {
 	// fmt.Println(squaresInRect(4, 4))
 
 	// дано время для нескольких участников. найти разницу между большим и меньшим временем, среднее время, и медиану.
-	fmt.Println(stati("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
+	// fmt.Println(stati("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
+
+	// получить век из года
+	fmt.Println(WhatCentury("7901"))
+}
+
+func WhatCentury(year string) string {
+
+	// проверка что век хотябы первый
+	lenIs := len(year) - 2
+	if lenIs <= 0 {
+		return ""
+	}
+
+	// проверка что если век с двумя нулями в конце то будет прошлый, а иначе век + 1
+	result, _ := strconv.Atoi(year[0:lenIs])
+	zeroCheck := year[lenIs:len(year)]
+	zeroNum, _ := strconv.Atoi(zeroCheck)
+	if zeroNum != 0 {
+		result++
+	}
+
+	// окончания для веков
+	var suffix string = "th"
+	if result < 11 || result > 13 {
+		switch result % 10 {
+		case 1:
+			suffix = "st"
+		case 2:
+			suffix = "nd"
+		case 3:
+			suffix = "rd"
+		}
+	}
+
+	return strconv.Itoa(result) + suffix
 }
 
 // 01|01|18 Average: 01|38|05 Median: 01|32|34

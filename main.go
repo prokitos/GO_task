@@ -21,3 +21,8 @@ func main() {
 
 	fmt.Println("end of programm")
 }
+
+type Tstru struct {
+	Name string
+	Age  int
+}
