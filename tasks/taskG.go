@@ -32,7 +32,31 @@ func MainG() {
 	// fmt.Println(stati("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
 
 	// получить век из года
-	fmt.Println(WhatCentury("7901"))
+	// fmt.Println(WhatCentury("7901"))
+
+	// посчитать количество цифр если сложить все числа от 1 до N
+	fmt.Println(AmountOfPages(10))
+}
+
+func AmountOfPages(summary int) int {
+
+	sum := 0
+	digit := 1
+	count := 0
+	a := 10
+	for sum < summary {
+		count += 1
+		if count%a == 0 {
+			digit += 1
+			a *= 10
+		}
+		sum += digit
+	}
+
+	if sum > summary {
+		count -= 1
+	}
+	return count
 }
 
 func WhatCentury(year string) string {
