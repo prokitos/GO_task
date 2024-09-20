@@ -35,7 +35,26 @@ func MainG() {
 	// fmt.Println(WhatCentury("7901"))
 
 	// посчитать количество цифр если сложить все числа от 1 до N
-	fmt.Println(AmountOfPages(10))
+	// fmt.Println(AmountOfPages(10))
+
+	// верный ли айпи
+	fmt.Println(Is_valid_ip("1.1.1.1"))
+}
+
+func Is_valid_ip(ip string) bool {
+
+	allNums := strings.Split(ip, ".")
+	if len(allNums) != 4 {
+		return false
+	}
+	for _, items := range allNums {
+		curItem, err := strconv.Atoi(items)
+		if curItem < 0 || curItem > 255 || err != nil || strconv.Itoa(curItem) != items {
+			return false
+		}
+	}
+
+	return true
 }
 
 func AmountOfPages(summary int) int {
