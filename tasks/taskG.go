@@ -36,9 +36,10 @@ func MainG() {
 
 	// посчитать количество цифр если сложить все числа от 1 до N
 	// fmt.Println(AmountOfPages(10))
+	fmt.Println(ReverseAmountOfPages(11))
 
 	// верный ли айпи
-	fmt.Println(Is_valid_ip("1.1.1.1"))
+	// fmt.Println(Is_valid_ip("1.1.1.1"))
 }
 
 func Is_valid_ip(ip string) bool {
@@ -55,6 +56,20 @@ func Is_valid_ip(ip string) bool {
 	}
 
 	return true
+}
+
+func ReverseAmountOfPages(summary int) int {
+
+	var summaryStr = strconv.Itoa(summary)
+	var res int = summary * len(summaryStr)
+
+	for i := 1; i < len(summaryStr); i++ {
+		temp := strings.Repeat("9", i)
+		intTemp, _ := strconv.Atoi(temp)
+		res = res - intTemp
+	}
+
+	return res
 }
 
 func AmountOfPages(summary int) int {
