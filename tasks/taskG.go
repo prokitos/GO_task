@@ -36,10 +36,34 @@ func MainG() {
 
 	// посчитать количество цифр если сложить все числа от 1 до N
 	// fmt.Println(AmountOfPages(10))
-	fmt.Println(ReverseAmountOfPages(11))
+	// fmt.Println(ReverseAmountOfPages(11))
 
 	// верный ли айпи
 	// fmt.Println(Is_valid_ip("1.1.1.1"))
+
+	// найти сколько чисел от X до Y делятся нацело на Z.
+	fmt.Println(DivisibleCount(6, 11, 2))
+}
+
+func DivisibleCount(x, y, k uint64) uint64 {
+
+	// сложность 0(N)
+	// var res uint64 = 0
+	// for i := x; i <= y; i++ {
+	// 	if i%k == 0 {
+	// 		res++
+	// 	}
+	// }
+	// return res
+
+	// сложность O(1)
+	var res uint64 = 0
+	res = y / k
+	res -= x / k
+	if x%k == 0 {
+		res++
+	}
+	return res
 }
 
 func Is_valid_ip(ip string) bool {
