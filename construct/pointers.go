@@ -4,6 +4,8 @@ import "fmt"
 
 func cPointer() {
 
+	//var newNode *Node = &Node{value: value}
+
 	smartBase := Smartphone{"basic smart"}
 
 	// изначально оба гика ссылаются на одно и тоже значение

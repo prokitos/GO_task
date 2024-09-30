@@ -18,6 +18,7 @@ func main() {
 	// fmt.Scan()
 
 	//construct.MainConstruct()
+	//construct.TestStackQueue()
 
 	fmt.Println("end of programm")
 }

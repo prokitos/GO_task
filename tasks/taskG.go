@@ -42,7 +42,7 @@ func MainG() {
 	// fmt.Println(Is_valid_ip("1.1.1.1"))
 
 	// найти сколько чисел от X до Y делятся нацело на Z.
-	fmt.Println(DivisibleCount(6, 11, 2))
+	// fmt.Println(DivisibleCount(6, 11, 2))
 }
 
 func DivisibleCount(x, y, k uint64) uint64 {
