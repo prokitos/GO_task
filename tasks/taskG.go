@@ -43,6 +43,45 @@ func MainG() {
 
 	// найти сколько чисел от X до Y делятся нацело на Z.
 	// fmt.Println(DivisibleCount(6, 11, 2))
+
+	// фибоначи с получением всех чисел до нужного через рекурсию
+	// var res []int = fibonachiRec([]int{}, 100)
+	// fmt.Println(res)
+
+	// фибоначи с получением всех чисел до нужного через цикл. если делать до 100 000, то скорость будет в 50 раз быстрее чем рекурсия
+	// var temp []int = fibonachiFast(100)
+	// fmt.Println(temp)
+}
+
+func fibonachiFast(num int) []int {
+	var res []int = make([]int, num)
+	var first int = 0
+	var second int = 1
+
+	res[0] = first
+	res[1] = second
+
+	for i := 2; i < num; i++ {
+		res[i] = first + second
+		first, second = second, first+second
+	}
+
+	return res
+}
+
+func fibonachiRec(temp []int, maxIter int) []int {
+
+	if len(temp) == 0 {
+		temp = append(temp, 0)
+	} else if len(temp) == 1 {
+		temp = append(temp, 1)
+	} else if maxIter == 0 {
+		return temp
+	} else {
+		temp = append(temp, temp[len(temp)-2]+temp[len(temp)-1])
+	}
+
+	return fibonachiRec(temp, maxIter-1)
 }
 
 func DivisibleCount(x, y, k uint64) uint64 {
