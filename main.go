@@ -14,7 +14,8 @@ func main() {
 	// tasks.MainD2()
 	// tasks.MainE()
 	// tasks.MainF()
-	tasks.MainG()
+	// tasks.MainG()
+	tasks.MainH()
 	// fmt.Scan()
 
 	//construct.MainConstruct()
